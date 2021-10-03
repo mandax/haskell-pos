@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds       #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators   #-}
+
 module Lib
     ( startApp
     , app
@@ -12,15 +13,27 @@ import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
 
+
+-- TYPES
+
 data User = User
-  { userId        :: Int
-  , userFirstName :: String
-  , userLastName  :: String
+  { id    :: Int
+  , email :: String
+  , name  :: String
+  , role  :: String
   } deriving (Eq, Show)
 
-$(deriveJSON defaultOptions ''User)
+$(deriveJSON defaultOptions 'User)
+
+
+
+-- ROUTES
 
 type API = "users" :> Get '[JSON] [User]
+
+
+
+-- SERVER
 
 startApp :: IO ()
 startApp = do 
@@ -38,6 +51,7 @@ server :: Server API
 server = return users
 
 users :: [User]
-users = [ User 1 "Isaac" "Newton"
-        , User 2 "Albert" "Einstein"
+users = [ User 1 "Isaac" "Newton" "admin"
+        , User 2 "Albert" "Einstein" "client"
         ]
+

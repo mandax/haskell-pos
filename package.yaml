@@ -24,6 +24,7 @@ dependencies:
 - servant-server
 - wai
 - warp
+- postgresql-typed
 
 library:
   source-dirs: src
