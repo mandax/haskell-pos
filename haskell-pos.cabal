@@ -32,7 +32,9 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
-    , postgresql-typed
+    , composite-aeson
+    , mtl
+    , postgresql-simple
     , servant-server
     , wai
     , warp
@@ -48,8 +50,10 @@ executable haskell-pos-exe
   build-depends:
       aeson
     , base
+    , composite-aeson
     , haskell-pos
-    , postgresql-typed
+    , mtl
+    , postgresql-simple
     , servant-server
     , wai
     , warp
@@ -66,11 +70,13 @@ test-suite haskell-pos-test
   build-depends:
       aeson
     , base
+    , composite-aeson
     , haskell-pos
     , hspec
     , hspec-wai
     , hspec-wai-json
-    , postgresql-typed
+    , mtl
+    , postgresql-simple
     , servant-server
     , wai
     , warp
